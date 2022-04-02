@@ -7,6 +7,10 @@
 
 import UIKit
 
-class String_Extension: NSObject {
-
+extension String {
+    func urlEncoded() -> String {
+        return self
+            .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)?
+            .replacingOccurrences(of: "%20", with: "+") ?? ""
+    }
 }

@@ -6,7 +6,15 @@
 //
 
 import UIKit
+import SwiftUI
 
-class Transition: NSObject {
+enum Transition {
+    case none
+    case custom(AnyTransition)
+}
 
+enum NavigationType {
+    case pop
+    case push
+    case popToRoot
 }

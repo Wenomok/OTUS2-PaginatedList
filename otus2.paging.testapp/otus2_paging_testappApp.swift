@@ -12,6 +12,8 @@ struct otus2_paging_testappApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(ITunesViewModel())
+                .environmentObject(StackOverflowViewModel())
         }
     }
 }

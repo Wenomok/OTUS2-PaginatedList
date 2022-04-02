@@ -6,7 +6,10 @@
 //
 
 import UIKit
+import SwiftUI
 
-class SwiftUIView_Extension: NSObject {
-
+extension View {
+    func toAnyView() -> AnyView {
+        return AnyView(self)
+    }
 }

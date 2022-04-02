@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LoadContentView<Content>: View where Content: View {
-    @EnvironmentObject var contentView: ContentViewModel
+    @Binding var isReloading: Bool
     
     @ViewBuilder var onFinishLoadingContent: () -> Content
     
     var body: some View {
-        if contentView.isReloading {
+        if isReloading {
             Spacer()
             ProgressView()
                 .scaleEffect(1.5)
@@ -26,7 +26,7 @@ struct LoadContentView<Content>: View where Content: View {
 
 struct LoadContentView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadContentView {
+        LoadContentView(isReloading: .constant(true)) {
             Text("")
         }
     }

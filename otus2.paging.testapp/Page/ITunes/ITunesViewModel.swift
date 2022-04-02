@@ -8,27 +8,27 @@
 import UIKit
 import SwiftUI
 
-class ITunesViewModel: ObservableObject {
-    @Published var isReloading: Bool = true
+class ITunesViewModel: ContentViewModel {
+    @Published private(set) var itunesItems: [MediaItem] = []
     
-    @Published var itunesItems: [MediaItem] = []
+    private(set) var isFirstLoading: Bool = true
     
-    var page: Int = 1
-    
-    @Published var isNextPageAvailable: Bool = true
-    
-    func loadITunesSongs(page: Int) {
+    func loadITunesSongs(page: Int, isRefresh: Bool = false) {
+        if isFirstLoading {
+            isFirstLoading = false
+        }
         self.page = page
         
-        if self.page == 1 {
+        if isRefresh {
             DispatchQueue.main.async {
+                self.itunesItems.removeAll()
                 self.isReloading = true
                 self.isNextPageAvailable = true
             }
         }
         
         NetworkManager.shared.getSongs(byArtist: "Black eyed peas", page: page) { response in
-            if self.page == 1 {
+            if isRefresh {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.isReloading = false
                 }

@@ -6,7 +6,13 @@
 //
 
 import UIKit
+import SwiftUI
 
-class Screen: NSObject {
-
+struct Screen: Identifiable, Equatable {
+    let id: String = UUID().uuidString
+    let view: AnyView
+    
+    public static func == (lhs: Screen, rhs: Screen) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

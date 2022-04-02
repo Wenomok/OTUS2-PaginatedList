@@ -8,5 +8,8 @@
 import UIKit
 
 class ContentViewModel: ObservableObject {
+    @Published var isReloading: Bool = false
+    @Published var isNextPageAvailable: Bool = true
     
+    var page: Int = 1
 }
